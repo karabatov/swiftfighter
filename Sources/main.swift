@@ -4,8 +4,8 @@ print("∴ Swiftfighter ∵")
 
 var stop = false
 
-Heartbeat.isAPIup { ok in
-    print("API is \(ok ? "up :)" : "down :(")")
+Heartbeat.isAPIup { up in
+    print("API is \(up ? "up :)" : "down :(")")
     stop = true
 }
 

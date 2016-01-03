@@ -1,13 +1,20 @@
+import Foundation
 import Stockfighter
 
 print("∴ Swiftfighter ∵")
 
-var stop = false
+var globalStop = false
 
-Heartbeat.isAPIup { up in
-    print("API is \(up ? "up :)" : "down :(")")
-    stop = true
+isStockfighterAPIup { heartbeat in
+    if heartbeat.ok {
+        print("API is up!")
+    } else {
+        print("API is down: \(heartbeat.error)")
+        globalStop = true
+    }
 }
 
-repeat {} while !stop
+repeat {
+    NSThread.sleepForTimeInterval(1.0)
+} while !globalStop
 

@@ -26,7 +26,7 @@ default:
     break
 }
 
-let SF = SFAPI(baseAPI: "https://api.stockfighter.io/ob/api/", APIKey: apiKey)
+let SF = SFAPI(baseAPI: "https://api.stockfighter.io", APIKey: apiKey)
 
 SF.isAPIUp { heartbeat in
     if heartbeat.ok {

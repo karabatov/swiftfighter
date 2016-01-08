@@ -7,23 +7,26 @@ print("∴ Swiftfighter ∵")
 var globalStop = false
 /// API key string, read from file during program start.
 var apiKey = ""
+/// Desired level to start, first by default.
+var levelPlayed = StockfighterLevel.FirstSteps
 
 // MARK: Command line arguments
 
 switch Process.arguments.count {
-case 1:
-    print("Usage:")
-    print("$ Swiftfighter api_key.txt")
-    fatalError()
-case 2:
+case 3:
     if let
         fileData = NSFileManager.defaultManager().contentsAtPath(Process.arguments[1]),
-        apiKeyStr = String(data: fileData, encoding: NSUTF8StringEncoding)
+        apiKeyStr = String(data: fileData, encoding: NSUTF8StringEncoding),
+        levelNumber = Int(Process.arguments[2]),
+        level = StockfighterLevel(rawValue: levelNumber)
     {
+        levelPlayed = level
         apiKey = apiKeyStr.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     }
 default:
-    break
+    print("Usage:")
+    print("$ Swiftfighter api_key.txt level_number")
+    fatalError("Wrong command line parameters given.")
 }
 
 let SF = SFAPI(baseAPI: "https://api.stockfighter.io", APIKey: apiKey)

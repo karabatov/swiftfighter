@@ -1,2 +1,2 @@
 #!/bin/bash
-.build/debug/Swiftfighter api_key.txt
+.build/debug/Swiftfighter api_key.txt 1

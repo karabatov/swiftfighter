@@ -21,8 +21,6 @@ case 2:
         apiKeyStr = String(data: fileData, encoding: NSUTF8StringEncoding)
     {
         apiKey = apiKeyStr.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
-    } else {
-        fatalError()
     }
 default:
     break

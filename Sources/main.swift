@@ -20,7 +20,7 @@ case 2:
         fileData = NSFileManager.defaultManager().contentsAtPath(Process.arguments[1]),
         apiKeyStr = String(data: fileData, encoding: NSUTF8StringEncoding)
     {
-        apiKey = apiKeyStr
+        apiKey = apiKeyStr.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
     } else {
         fatalError()
     }

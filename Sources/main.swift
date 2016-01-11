@@ -3,8 +3,6 @@ import Stockfighter
 
 print("∴ Swiftfighter ∵")
 
-/// Global stop flag, program is running only while it's false.
-var globalStop = false
 /// SF API instance.
 let SF: SFAPI
 /// API key string, read from file during program start.
@@ -43,9 +41,20 @@ SF.isAPIUp { heartbeat in
         game?.startGame()
     } else {
         print("API is down: \(heartbeat.error)")
-        globalStop = true
     }
 }
 
-repeat {} while !globalStop
+// Readline doesn't eat any cycles while the game is running. Otherwise multithreading doesn't work!
+repeat {} while readLine() != "~"
 
+// A little dance to stop the level instance before quitting, if possible.
+var stop = true
+if let game = game {
+    stop = false
+    print("Stopping level instance…")
+    game.stopGame { stopped in
+        print("Level instance stopped: \(stopped)")
+        stop = true
+    }
+}
+repeat {} while !stop

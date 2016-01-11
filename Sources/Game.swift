@@ -26,6 +26,12 @@ class Game: NSObject {
         }
     }
 
+    func stopGame(handler: ((Bool) -> Void)?) {
+        SF.stopLevelInstance(instance) { stopped in
+            handler?(stopped)
+        }
+    }
+
     /// Called by self.healThread, so can't be private.
     func instanceHealthCheck() {
         guard instance > 0 else { return }
